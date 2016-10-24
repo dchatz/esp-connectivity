@@ -1,0 +1,71 @@
+// Import required libraries
+#include <ESP8266WiFi.h>
+
+// WiFi parameters
+const char* ssid = "XXXXXXX";  //either ssid for own AP or ssid for Ap to connect to 
+const char* password = "xxxxxxxxxx";  //password for either way
+// IPAddress ip(192, 168, xx, xx); // uncomment and replace in case you need to specify ip (default 192.168.4.1)
+// IPAddress subnet(255, 255, 255, 0); // uncomment and replace in case you need to specify
+
+//Times to blink after connected. Indication with internal led when connection completed
+int blinks = 20;
+
+void setup(void)  {
+pinMode(LED_BUILTIN, OUTPUT); //specify internal led according to board
+digitalWrite(LED_BUILTIN, HIGH);
+
+// Start Serial
+Serial.begin(115200);
+Serial.println();
+
+// CASE 1. In case the module is used as ACCESS POINT-------------------
+Serial.println("Configuring access point...");
+//   WiFi.softAPConfig(ip, ip, subnet);  // uncomment in case you need to specify IP
+   WiFi.softAP(ssid, password);
+   while (WiFi.status() != WL_CONNECTED) { 
+   digitalWrite(LED_BUILTIN, LOW);  // builtin led is blinking slowly till connection
+   delay(250);
+   digitalWrite(LED_BUILTIN, HIGH);
+   delay(250);
+   Serial.print(".");
+}
+
+   Serial.println("done");
+   for (int i = 0; i<=blinks; i++) { 
+   digitalWrite(LED_BUILTIN, LOW);  // builtin led blinks quickly after connection completed
+   delay(40);
+   digitalWrite(LED_BUILTIN, HIGH);
+   delay(40);
+   }
+   IPAddress myIP = WiFi.softAPIP(); 
+   Serial.print("AP IP address: ");
+   Serial.println(myIP);               // Serial print IP. Specified or default
+//--------------------------------------------------------------
+
+/*//CASE 2. In case the module is used as Wifi Client--------------------
+
+WiFi.begin(ssid, password);
+while (WiFi.status() != WL_CONNECTED) {
+digitalWrite(LED_BUILTIN, LOW); // builtin led is blinking slowly till connection
+delay(250);
+digitalWrite(LED_BUILTIN, HIGH);
+delay(250);
+Serial.print(".");
+}
+Serial.println("");
+Serial.println("WiFi connected");
+for (int i = 0; i<=blinks; i++) { 
+digitalWrite(LED_BUILTIN, LOW); // builtin led blinks quickly after connection completed
+delay(40);
+digitalWrite(LED_BUILTIN, HIGH);
+delay(40);
+}
+// Print the IP address
+
+Serial.println(WiFi.localIP()); // Serial print IP. Specified by DHCP server
+//---------------------------------------------------------------*/
+
+}
+
+void loop() {
+}

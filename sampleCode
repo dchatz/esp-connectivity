@@ -4,7 +4,7 @@
 // WiFi parameters
 const char* ssid = "XXXXXXX";  //either ssid for own AP or ssid for Ap to connect to 
 const char* password = "xxxxxxxxxx";  //password for either way
-// IPAddress ip(192, 168, xx, xx); // uncomment and replace in case you need to specify ip (default 192.168.4.1)
+// IPAddress ip(192, 168, xx, xx); // uncomment and replace in case you need to specify ip (only as AP - default 192.168.4.1)
 // IPAddress subnet(255, 255, 255, 0); // uncomment and replace in case you need to specify
 
 //Times to blink after connected. Indication with internal led when connection completed

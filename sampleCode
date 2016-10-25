@@ -7,6 +7,12 @@ const char* password = "xxxxxxxxxx";  //password for either way
 // IPAddress ip(192, 168, xx, xx); // uncomment and replace in case you need to specify ip (only as AP - default 192.168.4.1)
 // IPAddress subnet(255, 255, 255, 0); // uncomment and replace in case you need to specify
 
+//Define which LED will blink
+//onboard LED of NODEMCU = "LED_BUILTIN" or "D0" or "16" (PWM not supported)
+//onboard esp chip led = "D4" or "2"   (PWM not supported)
+#define blinkLED LED_BUILTIN
+
+
 //Times to blink after connected. Indication with internal led when connection completed
 int blinks = 20;
 
